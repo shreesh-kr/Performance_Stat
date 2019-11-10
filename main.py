@@ -5,9 +5,11 @@ import datetime, csv
 import numpy as np
 
 
-form1, base1 = uic.loadUiType('assets/main.ui')
-date = "Today's date is"+"\n"+str(datetime.date.today())
+form1, base1 = uic.loadUiType('assets/main.ui') # path to the .ui file
+date = "Today's date is"+"\n"+str(datetime.date.today()) # present day date to be displayed on the main
+                                                         # screen
 
+# main class, this will load the main window of the app
 class MAIN(base1, form1):
     def __init__(self):
         super(base1, self).__init__()
@@ -138,13 +140,15 @@ class MAIN(base1, form1):
 
         write_to_csv(date, true, false)
 
-    # this method will display stats
+    # this method will load the report screen
     def stats(self):
         self.window = PERFOR_STAT()
         self.window.show()
         self.close()
 
 form_2, base_2 = uic.loadUiType('assets/perfrom_stat.ui')
+
+# below class will load the report screen.
 
 
 class PERFOR_STAT(base_2, form_2):
@@ -156,7 +160,7 @@ class PERFOR_STAT(base_2, form_2):
         report = self.report_gen()
         self.label_2.setText(report)
 
-    
+    # this method displays the reports
     def report_gen(self):
         path = '/home/shreesh/Project/Performance-Stat/assets/data.csv'
 
@@ -178,6 +182,8 @@ class PERFOR_STAT(base_2, form_2):
         true = np.array(true)
         false = np.array(false)
 
+        # data to be displayed in the report
+
         number_of_days = len(date)
         true_avg = int(np.mean(true))
         false_avg = int(np.mean(false))
@@ -186,6 +192,8 @@ class PERFOR_STAT(base_2, form_2):
         max_true_day = date[np.argmax(true, axis=0)]
         max_false_day = date[np.argmax(false, axis=0)]
 
+        # final report
+        
         report = f'''
         Average task performed during the period of {number_of_days} days is {true_avg}.
         Average task's not performed during the period of {number_of_days} days is {false_avg}.

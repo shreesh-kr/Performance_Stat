@@ -198,7 +198,7 @@ color: rgb(85, 197, 197);</string>
      <rect>
       <x>310</x>
       <y>190</y>
-      <width>131</width>
+      <width>161</width>
       <height>23</height>
      </rect>
     </property>
@@ -206,7 +206,7 @@ color: rgb(85, 197, 197);</string>
      <string notr="true">color: rgb(211, 215, 207);</string>
     </property>
     <property name="text">
-     <string>Right eat &amp; sleep</string>
+     <string>Right eat and sleep</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_11">
