@@ -309,10 +309,14 @@ color: rgb(85, 197, 197);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>40</y>
       <width>121</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(211, 215, 207);
+font: 25 13pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="text">
      <string/>

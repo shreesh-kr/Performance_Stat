@@ -2,10 +2,11 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import uic
 import datetime, csv
+import numpy as np
 
 
 form1, base1 = uic.loadUiType('assets/main.ui')
-
+date = "Today's date is"+"\n"+str(datetime.date.today())
 
 class MAIN(base1, form1):
     def __init__(self):
@@ -13,6 +14,7 @@ class MAIN(base1, form1):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.save)
         self.pushButton_2.clicked.connect(self.stats)
+        self.label_2.setText(date)
 
     # this method will store the stats
 
@@ -150,6 +152,49 @@ class PERFOR_STAT(base_2, form_2):
         super(base_2, self).__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(self.quit)
+        
+        report = self.report_gen()
+        self.label_2.setText(report)
+
+    
+    def report_gen(self):
+        path = '/home/shreesh/Project/Performance-Stat/assets/data.csv'
+
+        file = open(path, 'r')
+        csv_file = csv.reader(file)
+
+
+        date = []
+        true = []
+        false = []
+
+        for row in csv_file:
+            date.append(row[0])
+            true.append(int(row[1]))
+            false.append(int(row[2]))
+            
+
+        date = np.array(date)
+        true = np.array(true)
+        false = np.array(false)
+
+        number_of_days = len(date)
+        true_avg = int(np.mean(true))
+        false_avg = int(np.mean(false))
+        max_true = np.max(true)
+        max_false = np.max(false)
+        max_true_day = date[np.argmax(true, axis=0)]
+        max_false_day = date[np.argmax(false, axis=0)]
+
+        report = f'''
+        Average task performed during the period of {number_of_days} days is {true_avg}.
+        Average task's not performed during the period of {number_of_days} days is {false_avg}.
+        Maximum performing day was {max_true_day} with {max_true} task's performed.
+        Least performing day was {max_false_day} with {max_false} task's not performed.
+
+        Day 1 of observation is {date[0]}, Last day of observation is {date[-1]}.
+        '''
+        return report
 
     def quit(self):
         self.close()
